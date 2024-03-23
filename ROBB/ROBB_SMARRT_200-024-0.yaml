@@ -1,0 +1,244 @@
+blueprint:
+  name: ROBB SMARRT Remote
+  description:  Blueprint to configure the ROBB SMARRT zigbee remote (ROB_200-024-0). Control 4 lights and call 2 actions with the scene buttons
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: The remote control.
+      selector:
+        device:
+          integration: zha
+          model: ROB_200-024-0
+    light1:
+      name: Light 1
+      description: Light controlled by button 1.
+      selector:
+        entity:
+          domain: light
+    light2:
+      name: Light 2
+      description: Light controlled by button 2.
+      selector:
+        entity:
+          domain: light
+    light3:
+      name: Light 3
+      description: Light controlled by button 3.
+      selector:
+        entity:
+          domain: light
+    light4:
+      name: Light 4
+      description: Light controlled by button 4.
+      selector:
+        entity:
+          domain: light
+    scene1:
+      name: Action for Scene 1
+      description: Action for S1 button
+      default: {}
+      selector:
+        action: {}
+    scene2:
+      name: Action for Scene 2
+      description: Action for S1 button
+      default: {}
+      selector:
+        action: {}
+trigger:
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input remote
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'on' }}"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 1 }}"
+                sequence:
+                  - service: light.turn_on
+                    data: 
+                      transition: 0.2
+                    target:
+                      entity_id: !input light1
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 2 }}"
+                sequence:
+                  - service: light.turn_on
+                    data: 
+                      transition: 0.2
+                    target:
+                      entity_id: !input light2
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 3 }}"
+                sequence:
+                  - service: light.turn_on
+                    data: 
+                      transition: 0.2
+                    target:
+                      entity_id: !input light3
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 4 }}"
+                sequence:
+                  - service: light.turn_on
+                    data: 
+                      transition: 0.2
+                    target:
+                      entity_id: !input light4
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'off' }}"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 1 }}"
+                sequence:
+                  - service: light.turn_off
+                    data: 
+                      transition: 0.2
+                    target:
+                      entity_id: !input light1
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 2 }}"
+                sequence:
+                  - service: light.turn_off
+                    data: 
+                      transition: 0.2
+                    target:
+                      entity_id: !input light2
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 3 }}"
+                sequence:
+                  - service: light.turn_off
+                    data: 
+                      transition: 0.2
+                    target:
+                      entity_id: !input light3
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 4 }}"
+                sequence:
+                  - service: light.turn_off
+                    data: 
+                      transition: 0.2
+                    target:
+                      entity_id: !input light4
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 1 }}"
+                sequence:
+                  - repeat:
+                      sequence:
+                        - service: light.turn_on
+                          target:
+                            entity_id: !input light1
+                          data:
+                            transition: 0.19
+                            brightness_step: |
+                              {% if trigger.event.data.args[0] == 1  %}
+                                -8
+                              {% else %}
+                                 8
+                              {% endif %}
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 0
+                            milliseconds: 200
+                      count: 32
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 2 }}"
+                sequence:
+                  - repeat:
+                      sequence:
+                        - service: light.turn_on
+                          target:
+                            entity_id: !input light2
+                          data:
+                            transition: 0.19
+                            brightness_step: |
+                              {% if trigger.event.data.args[0] == 1  %}
+                                -8
+                              {% else %}
+                                 8
+                              {% endif %}
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 0
+                            milliseconds: 200
+                      count: 32
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 3 }}"
+                sequence:
+                  - repeat:
+                      sequence:
+                        - service: light.turn_on
+                          target:
+                            entity_id: !input light3
+                          data:
+                            transition: 0.19
+                            brightness_step: |
+                              {% if trigger.event.data.args[0] == 1  %}
+                                -8
+                              {% else %}
+                                 8
+                              {% endif %}
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 0
+                            milliseconds: 200
+                      count: 32
+              - conditions:
+                  - condition: template
+                    value_template: "{{ trigger.event.data.endpoint_id == 4 }}"
+                sequence:
+                  - repeat:
+                      sequence:
+                        - service: light.turn_on
+                          target:
+                            entity_id: !input light4
+                          data:
+                            transition: 0.19
+                            brightness_step: |
+                              {% if trigger.event.data.args[0] == 1  %}
+                                -8
+                              {% else %}
+                                 8
+                              {% endif %}
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 0
+                            milliseconds: 200
+                      count: 32                      
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.params.scene_id == 1 }}"
+        sequence: !input scene1
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.params.scene_id == 2 }}"
+        sequence: !input scene2          
+mode: restart
