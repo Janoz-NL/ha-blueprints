@@ -1,0 +1,105 @@
+blueprint:
+  name: ROBB SMARRT Draadloze Afstandsbediening knop
+  description: Blueprint voor een enkele knop op de ROBB SMARRT zigbee afstandsbediening (ROB_200-024-0) voor het bedienen van een lamp. De lamp kan in en uitgeschakeld worden en met lang indrukken wordt de helderheid aangepast.
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: The remote control
+      selector:
+        device:
+          integration: zha
+          model: ROB_200-024-0
+    light1:
+      name: Light 1
+      description: Light controlled by button 1
+      selector:
+        entity:
+          domain: light
+    light2:
+      name: Light 2
+      description: Light controlled by button 2
+      selector:
+        entity:
+          domain: light
+    light3:
+      name: Light 3
+      description: Light controlled by button 3
+      selector:
+        entity:
+          domain: light
+    light4:
+      name: Light 4
+      description: Light controlled by button 4
+      selector:
+        entity:
+          domain: light
+    scene1:
+      name: Action for Scene 1
+      description: Action for S1 button
+      selector:
+        action: {}
+    scene2:
+      name: Action for Scene 2
+      description: Action for S1 button
+      selector:
+        action: {}
+trigger:
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input remote
+condition: []
+variables:
+  lights: [!input light1, !input light2, !input light3, !input light4]
+action:
+  - choose:
+     - conditions:
+         - condition: template
+           value_template: "{{ trigger.event.data.command == 'on' }}"
+       sequence:
+         - service: light.turn_on
+           metadata: {}
+           data: {}
+           target:
+              entity_id: {{ lights[trigger.event.data.endpoint_id] }}
+     - conditions:
+         - condition: template
+           value_template: "{{ trigger.event.data.command == 'off' }}"
+       sequence:
+         - service: light.turn_off
+           metadata: {}
+           data: {}
+           target:
+              entity_id: {{ lights[trigger.event.data.endpoint_id] }}
+     - conditions:
+         - condition: template
+           value_template: "{{ trigger.event.data.command == 'move_with_on_off' }}"
+       sequence:
+         - repeat:
+             sequence:
+               - service: light.turn_on
+                 target:
+                   entity_id: {{ lights[trigger.event.data.endpoint_id] }}
+                 data:
+                   brightness_step: |
+                     {% if trigger.event.data.args[0] == 1  %}
+                       -8
+                     {% else %}
+                        8
+                     {% endif %}
+               - delay:
+                   hours: 0
+                   minutes: 0
+                   seconds: 0
+                   milliseconds: 200
+             count: 32
+              - conditions:
+     - condition: template
+           value_template: "{{ trigger.event.data.params.scene_id == 1 }}"
+       sequence: !input scene1
+     - conditions:
+         - condition: template
+           value_template: "{{ trigger.event.data.params.scene_id == 2 }}"
+       sequence: !input scene2          
+mode: restart
