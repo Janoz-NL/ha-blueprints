@@ -149,6 +149,7 @@ action:
                           target:
                             entity_id: !input light1
                           data:
+                            transition: 0.19
                             brightness_step: |
                               {% if trigger.event.data.args[0] == 1  %}
                                 -8
@@ -171,6 +172,7 @@ action:
                           target:
                             entity_id: !input light2
                           data:
+                            transition: 0.19
                             brightness_step: |
                               {% if trigger.event.data.args[0] == 1  %}
                                 -8
@@ -193,6 +195,7 @@ action:
                           target:
                             entity_id: !input light3
                           data:
+                            transition: 0.19
                             brightness_step: |
                               {% if trigger.event.data.args[0] == 1  %}
                                 -8
@@ -215,6 +218,7 @@ action:
                           target:
                             entity_id: !input light4
                           data:
+                            transition: 0.19
                             brightness_step: |
                               {% if trigger.event.data.args[0] == 1  %}
                                 -8
