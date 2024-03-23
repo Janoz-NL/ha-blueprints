@@ -56,7 +56,7 @@ action:
           {% if trigger.event.data.endpoint_id == 1 %} !input light1
           {% if trigger.event.data.endpoint_id == 2 %} !input light2
           {% if trigger.event.data.endpoint_id == 3 %} !input light3
-          {% if trigger.event.data.endpoint_id == 4 %} !input light4
+          {% else %} !input light4
           {% endif %}
   - choose:
       - conditions:
