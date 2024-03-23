@@ -1,6 +1,6 @@
 blueprint:
-  name: ROBB SMARRT Draadloze Afstandsbediening knop
-  description: Blueprint voor een enkele knop op de ROBB SMARRT zigbee afstandsbediening (ROB_200-024-0) voor het bedienen van een lamp. De lamp kan in en uitgeschakeld worden en met lang indrukken wordt de helderheid aangepast.
+  name: ROBB SMARRT Remote
+  description:  Blueprint to configure the ROBB SMARRT zigbee remote (ROB_200-024-0). Control 4 lights and call 2 actions with the scene buttons
   domain: automation
   input:
     remote:
@@ -37,11 +37,13 @@ blueprint:
     scene1:
       name: Action for Scene 1
       description: Action for S1 button
+      default: {}
       selector:
         action: {}
     scene2:
       name: Action for Scene 2
       description: Action for S1 button
+      default: {}
       selector:
         action: {}
 trigger:
