@@ -59,7 +59,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 1 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 1 }}"
                 sequence:
                   - service: light.turn_on
                     data: 
@@ -68,7 +68,7 @@ action:
                       entity_id: !input light1
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 2 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 2 }}"
                 sequence:
                   - service: light.turn_on
                     data: 
@@ -77,7 +77,7 @@ action:
                       entity_id: !input light2
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 3 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 3 }}"
                 sequence:
                   - service: light.turn_on
                     data: 
@@ -86,7 +86,7 @@ action:
                       entity_id: !input light3
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 4 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 4 }}"
                 sequence:
                   - service: light.turn_on
                     data: 
@@ -100,7 +100,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 1 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 1 }}"
                 sequence:
                   - service: light.turn_off
                     data: 
@@ -109,17 +109,16 @@ action:
                       entity_id: !input light1
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 2 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 2 }}"
                 sequence:
                   - service: light.turn_off
-                    metadata: {}
                     data: 
                       transition: 0.2
                     target:
                       entity_id: !input light2
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 3 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 3 }}"
                 sequence:
                   - service: light.turn_off
                     data: 
@@ -128,7 +127,7 @@ action:
                       entity_id: !input light3
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 4 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 4 }}"
                 sequence:
                   - service: light.turn_off
                     data: 
@@ -142,7 +141,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 1 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 1 }}"
                 sequence:
                   - repeat:
                       sequence:
@@ -164,7 +163,7 @@ action:
                       count: 32
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 2 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 2 }}"
                 sequence:
                   - repeat:
                       sequence:
@@ -186,7 +185,7 @@ action:
                       count: 32
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 3 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 3 }}"
                 sequence:
                   - repeat:
                       sequence:
@@ -208,7 +207,7 @@ action:
                       count: 32
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.entpoint_id == 4 }}"
+                    value_template: "{{ trigger.event.data.endpoint_id == 4 }}"
                 sequence:
                   - repeat:
                       sequence:
