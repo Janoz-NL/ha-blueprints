@@ -99,7 +99,8 @@ action:
                    seconds: 0
                    milliseconds: 200
              count: 32
-     - condition: template
+     - conditions:
+         - condition: template
            value_template: "{{ trigger.event.data.params.scene_id == 1 }}"
        sequence: !input scene1
      - conditions:
