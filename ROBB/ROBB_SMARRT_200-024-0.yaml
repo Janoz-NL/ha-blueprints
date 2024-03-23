@@ -52,12 +52,13 @@ trigger:
 condition: []
 action:
   - variables:
-      light: >-
-          {% if trigger.event.data.endpoint_id == 1 %} !input light1
-          {% if trigger.event.data.endpoint_id == 2 %} !input light2
-          {% if trigger.event.data.endpoint_id == 3 %} !input light3
-          {% else %} !input light4
-          {% endif %}
+      light1: !input light1
+      light2: !input light2
+      light3: !input light3
+      light4: !input light4
+      light: >  
+         {% set lights = [ light1, light2, light3, light4 ] %}
+         {{ lights[1] }}
   - choose:
       - conditions:
           - condition: template
