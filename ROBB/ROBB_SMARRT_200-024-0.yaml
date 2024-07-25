@@ -236,9 +236,13 @@ action:
       - conditions:
           - condition: template
             value_template: "{{ trigger.event.data.params.scene_id == 1 }}"
+          - condition: template
+            value_template: "{{ trigger.event.data.endpoint_id == 4 }}"
         sequence: !input scene1
       - conditions:
           - condition: template
             value_template: "{{ trigger.event.data.params.scene_id == 2 }}"
+          - condition: template
+            value_template: "{{ trigger.event.data.endpoint_id == 4 }}"
         sequence: !input scene2          
 mode: restart
