@@ -18,8 +18,9 @@ blueprint:
       description: Media player to be controlled by this remote
       selector:
         entity:
-          domain:
-          - media_player
+          filter:
+            - domain: 
+              - media_player
           multiple: false
 triggers:
   - event_type: zha_event
