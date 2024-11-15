@@ -1,0 +1,84 @@
+blueprint:
+  name: IKEA RODRET
+  description: Blueprint to configure the Ikea RODRET zigbee remote to control a single light.
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: The remote control.
+      selector:
+        device:
+          integration: zha
+          model: RODRET Dimmer
+          multiple: false
+    light:
+      name: Light
+      description: Light controlled by button.
+      selector:
+        entity:
+          domain:
+          - light
+          multiple: false
+trigger:
+- platform: event
+  event_type: zha_event
+  event_data:
+    device_id: !input remote
+condition: []
+action:
+- choose:
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.event.data.command == ''on'' }}'
+    sequence:
+    - service: light.turn_on
+      data:
+        transition: 0.2
+      target:
+        entity_id: !input light
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.event.data.command == ''off'' }}'
+    sequence:
+    - service: light.turn_off
+      data:
+        transition: 0.2
+      target:
+        entity_id: !input light
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.event.data.command == ''move_with_on_off'' }}'
+    sequence:
+    - repeat:
+        sequence:
+        - service: light.turn_on
+          target:
+            entity_id: !input light
+          data:
+            transition: 0.19
+            brightness_step: 8
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 0
+            milliseconds: 200
+        count: 32
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.event.data.command == ''move'' }}'
+    sequence:
+    - repeat:
+        sequence:
+        - service: light.turn_on
+          target:
+            entity_id: !input light
+          data:
+            transition: 0.19
+            brightness_step: -8
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 0
+            milliseconds: 200
+        count: 32
+mode: restart
