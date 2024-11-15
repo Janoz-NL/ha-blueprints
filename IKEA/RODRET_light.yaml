@@ -1,6 +1,8 @@
 blueprint:
-  name: IKEA RODRET
-  description: Blueprint to configure the Ikea RODRET zigbee remote to control a single light.
+  name: Ikea RODRET remote for single light 
+  description: >
+      Blueprint to configure the Ikea RODRET zigbee remote to control a single light. 
+      Single press of the on or off button to turn the light on or off, long press to change brightness. 
   domain: automation
   input:
     remote:
