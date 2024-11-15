@@ -17,7 +17,7 @@ blueprint:
       name: Media player
       description: Media player to be controlled by this remote
       selector:
-        device:
+        entity:
           domain:
           - media_player
           multiple: false
@@ -41,7 +41,7 @@ actions:
                   - action: media_player.volume_up
                     data: {}
                     target:
-                      device_id: !input player
+                      entity_id: !input player
               - conditions:
                   - condition: template
                     value_template: "{{ trigger.event.data.params.move_mode == 1 }}"
@@ -49,14 +49,14 @@ actions:
                   - action: media_player.volume_down
                     data: {}
                     target:
-                      device_id: !input player
+                      entity_id: !input player
               - conditions:
                   - condition: template
                     value_template: "{{ trigger.event.data.params.step_mode == 0 }}"
                 sequence:
                   - action: media_player.media_next_track
                     target:
-                      device_id: !input player
+                      entity_id: !input player
                     data: {}
               - conditions:
                   - condition: template
@@ -64,7 +64,7 @@ actions:
                 sequence:
                   - action: media_player.media_previous_track
                     target:
-                      device_id: !input player
+                      entity_id: !input player
                     data: {}
       - conditions:
           - condition: template
@@ -72,7 +72,7 @@ actions:
         sequence:
           - action: media_player.media_play_pause
             target:
-              device_id: !input player
+              entity_id: !input player
             data: {}
       - conditions:
           - condition: template
@@ -80,6 +80,6 @@ actions:
         sequence:
           - action: media_player.media_play_pause
             target:
-              device_id: !input player
+              entity_id: !input player
             data: {}
 mode: single
