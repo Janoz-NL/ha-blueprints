@@ -22,6 +22,42 @@ blueprint:
             - domain: 
               - media_player
           multiple: false
+    action_1_sp:
+      name: Button • single press
+      description: Action for single press of • 
+      default: {}
+      selector:
+        action: {}
+    action_1_dp:
+      name: Button • double press
+      description: Action for double press of • 
+      default: {}
+      selector:
+        action: {}
+    action_1_lp:
+      name: Button • long press
+      description: Action for long press of • 
+      default: {}
+      selector:
+        action: {}
+    action_1_sp:
+      name: Button •• single press
+      description: Action for single press of •• 
+      default: {}
+      selector:
+        action: {}
+    action_1_dp:
+      name: Button •• double press
+      description: Action for double press of •• 
+      default: {}
+      selector:
+        action: {}
+    action_1_lp:
+      name: Button •• long press
+      description: Action for long press of •• 
+      default: {}
+      selector:
+        action: {}
 triggers:
   - event_type: zha_event
     event_data:
@@ -79,8 +115,34 @@ actions:
           - condition: template
             value_template: "{{ trigger.event.data.endpoint_id == 2 }}"
         sequence:
-          - action: media_player.media_play_pause
-            target:
-              entity_id: !input player
-            data: {}
+          - conditions: 
+            - condition: template
+              value_template: "{{ trigger.event.data.command == 'short_release' }}"
+            sequence: !input action_1_sp
+          - conditions: 
+            - condition: template
+              value_template: "{{ trigger.event.data.command == 'multi_press_complete' }}"
+            sequence: !input action_1_dp
+          - conditions: 
+            - condition: template
+              value_template: "{{ trigger.event.data.command == 'long_press' }}"
+            sequence: !input action_1_lp
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.endpoint_id == 3 }}"
+        sequence:
+          - conditions: 
+            - condition: template
+              value_template: "{{ trigger.event.data.command == 'short_release' }}"
+            sequence: !input action_2_sp
+          - conditions: 
+            - condition: template
+              value_template: "{{ trigger.event.data.command == 'multi_press_complete' }}"
+            sequence: !input action_2_dp
+          - conditions: 
+            - condition: template
+              value_template: "{{ trigger.event.data.command == 'long_press' }}"
+            sequence: !input action_2_lp
+              
+            
 mode: single
