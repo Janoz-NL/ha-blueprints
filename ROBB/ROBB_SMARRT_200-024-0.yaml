@@ -37,15 +37,15 @@ blueprint:
     scene1:
       name: Action for Scene 1
       description: Action for S1 button
-      default: {}
+      default: []
       selector:
-        action: {}
+        action: 
     scene2:
       name: Action for Scene 2
       description: Action for S1 button
-      default: {}
+      default: []
       selector:
-        action: {}
+        action: 
 trigger:
   - platform: event
     event_type: zha_event
