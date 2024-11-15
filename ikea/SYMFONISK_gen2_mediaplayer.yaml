@@ -17,7 +17,7 @@ blueprint:
       name: Media player
       description: Media player to be controlled by this remote
       selector:
-        entity:
+        device:
           domain:
           - media_player
           multiple: false
