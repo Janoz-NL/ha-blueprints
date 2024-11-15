@@ -143,6 +143,4 @@ actions:
             - condition: template
               value_template: "{{ trigger.event.data.command == 'long_press' }}"
             sequence: !input action_2_lp
-              
-            
 mode: single
