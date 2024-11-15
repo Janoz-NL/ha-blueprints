@@ -45,19 +45,19 @@ blueprint:
       description: Action for single press of •• 
       default: {}
       selector:
-        actions: {}
+        action: 
     action_2_dp:
       name: Button •• double press
       description: Action for double press of •• 
       default: {}
       selector:
-        actions: {}
+        action: 
     action_2_lp:
       name: Button •• long press
       description: Action for long press of •• 
       default: {}
       selector:
-        actions: {}
+        action: 
 triggers:
   - event_type: zha_event
     event_data:
