@@ -25,37 +25,37 @@ blueprint:
     action_1_sp:
       name: Button • single press
       description: Action for single press of • 
-      default: {}
+      default: []
       selector:
         action: 
     action_1_dp:
       name: Button • double press
       description: Action for double press of • 
-      default: {}
+      default: []
       selector:
         action: 
     action_1_lp:
       name: Button • long press
       description: Action for long press of • 
-      default: {}
+      default: []
       selector:
         action: 
     action_2_sp:
       name: Button •• single press
       description: Action for single press of •• 
-      default: {}
+      default: []
       selector:
         action: 
     action_2_dp:
       name: Button •• double press
       description: Action for double press of •• 
-      default: {}
+      default: []
       selector:
         action: 
     action_2_lp:
       name: Button •• long press
       description: Action for long press of •• 
-      default: {}
+      default: []
       selector:
         action: 
 triggers:
