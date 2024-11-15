@@ -127,20 +127,4 @@ actions:
             - condition: template
               value_template: "{{ trigger.event.data.command == 'long_press' }}"
             sequence: !input action_1_lp
-      - conditions:
-          - condition: template
-            value_template: "{{ trigger.event.data.endpoint_id == 3 }}"
-        sequence:
-          - conditions: 
-            - condition: template
-              value_template: "{{ trigger.event.data.command == 'short_release' }}"
-            sequence: !input action_2_sp
-          - conditions: 
-            - condition: template
-              value_template: "{{ trigger.event.data.command == 'multi_press_complete' }}"
-            sequence: !input action_2_dp
-          - conditions: 
-            - condition: template
-              value_template: "{{ trigger.event.data.command == 'long_press' }}"
-            sequence: !input action_2_lp
 mode: single
