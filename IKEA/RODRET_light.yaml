@@ -15,6 +15,10 @@ blueprint:
            - RODRET Dimmer
            - RODRET wireless dimmer
           multiple: false
+        device:
+          integration: zha
+          model: RODRET wireless dimmer
+          multiple: false
     light:
       name: Light
       description: Light controlled by button.
