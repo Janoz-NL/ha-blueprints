@@ -11,7 +11,9 @@ blueprint:
       selector:
         device:
           integration: zha
-          model: RODRET Dimmer
+          model:
+           - RODRET Dimmer
+           - RODRET wireless dimmer
           multiple: false
     light:
       name: Light
